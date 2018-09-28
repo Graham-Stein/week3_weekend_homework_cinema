@@ -12,6 +12,25 @@ class Customer
     @funds = options['funds'].to_i
   end
 
+  def films()
+    sql = "
+    SELECT films.*
+    FROM customers
+    INNER JOIN tickets
+    ON customers.id = tickets.customer_id
+    INNER JOIN films
+    ON tickets.film_id = films.id
+    WHERE customers.id = $1;
+    "
+
+    values = [@id]
+
+    results = SqlRunner.run(sql, values)
+    film_objects = results.map do |film_object|
+      Film.new(film_object)
+    end
+    return film_objects
+  end
 
   def save()
     sql = "
