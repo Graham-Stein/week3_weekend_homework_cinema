@@ -12,6 +12,35 @@ class Customer
     @funds = options['funds'].to_i
   end
 
+  def buy_ticket(film)
+    price = film.price
+    @funds -= price
+    ticket = Ticket.new({
+      'customer_id' => @id,
+      'film_id' => film.id
+      })
+    ticket.save
+    self.update
+  end
+
+  def count_customer_tickets()
+    sql = "
+    SELECT tickets.*
+    FROM customers
+    INNER JOIN tickets
+    ON customers.id = tickets.customer_id
+    WHERE customers.id = $1;
+    "
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+
+    ticket_objects = result.map do |ticket_object|
+      Ticket.new(ticket_object)
+    end
+    number_of_tickets = ticket_objects.length
+    return number_of_tickets
+  end
+
   def films()
     sql = "
     SELECT films.*

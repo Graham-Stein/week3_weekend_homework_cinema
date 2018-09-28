@@ -29,7 +29,12 @@ class Film
       Customer.new(customer_object)
     end
     return customer_objects
-    binding.pry
+  end
+
+  def count_customers()
+    custs = self.customers
+    customers_at_film = custs.length
+    return customers_at_film
   end
 
   def save()

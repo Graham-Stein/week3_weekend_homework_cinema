@@ -52,58 +52,20 @@ film2.save
 film3.save
 film4.save
 
-ticket1 = Ticket.new({
-  'customer_id' => customer1.id,
-  'film_id' => film1.id
-  })
-ticket2 = Ticket.new({
-  'customer_id' => customer1.id,
-  'film_id' => film2.id
-  })
-ticket3 = Ticket.new({
-  'customer_id' => customer1.id,
-  'film_id' => film3.id
-  })
-ticket4 = Ticket.new({
-  'customer_id' => customer2.id,
-  'film_id' => film1.id
-  })
-ticket5 = Ticket.new({
-  'customer_id' => customer2.id,
-  'film_id' => film2.id
-  })
-ticket6 = Ticket.new({
-  'customer_id' => customer2.id,
-  'film_id' => film3.id
-  })
-ticket7 = Ticket.new({
-  'customer_id' => customer3.id,
-  'film_id' => film1.id
-  })
-ticket8 = Ticket.new({
-  'customer_id' => customer3.id,
-  'film_id' => film2.id
-  })
-ticket9 = Ticket.new({
-  'customer_id' => customer3.id,
-  'film_id' => film3.id
-  })
-ticket10 = Ticket.new({
-  'customer_id' => customer3.id,
-  'film_id' => film4.id
-  })
+  customer1.buy_ticket(film1)
+  customer1.buy_ticket(film2)
+  customer1.buy_ticket(film3)
+  customer2.buy_ticket(film1)
+  customer2.buy_ticket(film2)
+  customer2.buy_ticket(film3)
+  customer3.buy_ticket(film1)
+  customer3.buy_ticket(film2)
+  customer3.buy_ticket(film3)
+  customer3.buy_ticket(film4)
 
-ticket1.save
-ticket2.save
-ticket3.save
-ticket4.save
-ticket5.save
-ticket6.save
-ticket7.save
-ticket8.save
-ticket9.save
-ticket10.save
+  customer3.count_customer_tickets
 
+  film1.count_customers
 
 binding.pry
 nil
