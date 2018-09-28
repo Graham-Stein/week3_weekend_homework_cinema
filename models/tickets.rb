@@ -12,6 +12,11 @@ class Ticket
     @film_id  = options['film_id'].to_i
   end
 
+  def self.delete_all()
+    sql  = "DELETE FROM tickets"
+    SqlRunner.run(sql)
+  end
+
   def save()
     sql = "
       INSERT INTO tickets(
@@ -27,5 +32,28 @@ class Ticket
     result = SqlRunner.run(sql, values)
     @id = result[0]['id'].to_i
   end
+
+  def self.all()
+
+  sql = "SELECT * FROM tickets"
+  tickets = SqlRunner.run(sql)
+    ticket_objects = tickets.map do |ticket_object|
+      Ticket.new(ticket_object)
+    end
+    return ticket_objects
+  end
+
+  # def update()
+  #   sql = "
+  #     UPDATE tickets
+  #     SET (
+  #       customer_id,
+  #       film_id
+  #     ) = ($1, $2)
+  #     WHERE id = $3;
+  #   "
+  #   values = [@customer_id, @film_id, @id]
+  #   SqlRunner.run(sql, values)
+  # end
 
 end
